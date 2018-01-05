@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.lanshifu.quguang.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_mechineNumber"
+        android:orderInCategory="100"
+        android:title="获取机器码"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_check"
+        android:orderInCategory="100"
+        android:title="检查软件是否注册"
+        app:showAsAction="never" />
+
+
+
+    <item
+        android:id="@+id/action_for"
+        android:orderInCategory="100"
+        android:title="更新说明"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/update"
+        android:orderInCategory="100"
+        android:title="手动检查更新"
+        app:showAsAction="never" />
+</menu>

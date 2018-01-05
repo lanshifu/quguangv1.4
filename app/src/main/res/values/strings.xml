@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">蓝师傅公众号取关脚本</string>
+    <string name="accessibility_description">欢迎使用v1.9：打开开关，取关完成记得回来关闭哦。
+        </string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+    <string name="use_details">
+        \t\t\t\t使用说明（没注册联系卖家注册）：\n\t\t\t\t
+		注意看步骤！！！\n
+		1、（还没注册的）点击右上角-获取机器码-复制机器码，发给卖家，卖家完成注册。
+		2、点击"开启脚本插件"按钮，跳转到如图位置,打开。\n
+		3、去公众号列表，随便长按一个公众号，脚本开始自动执行。\n
+		4、取关完成后务必返回关闭脚本服务！！！ \n
+
+        	</string>
+        
+    <string name="updata_detail">
+		v1.9 版本说明：\n\n
+        1、更改机器码验证方式，服务器验证\n
+		2、增加设置选项\n
+        3、解决平板不能获取机器码的问题,自动获取随机机器码\n
+        4、使用方式和老版本一样\n\n\n
+		本次更新功能：部分微信公众号取关完又回来，应该是取关速度太快被腾讯检测到，所以修改了设置，真正能设置取关速度，
+        建议值为1000以内（）
+        5、增加在线检查更新功能。
+
+
+        </string>
+        	
+        	<string name="use_detail">\n\t\t\t\t
+        	说明：\n\t\t\t\t\n\t\t\t\t
+        	
+        	</string>
+
+</resources>
