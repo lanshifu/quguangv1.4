@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">蓝师傅公众号取关脚本</string>
+    <string name="app_name">蓝师傅公众号取关脚本1.9(201801)</string>
     <string name="accessibility_description">欢迎使用v1.9：打开开关，取关完成记得回来关闭哦。
         </string>
     <string name="hello_world">Hello world!</string>
@@ -17,14 +17,14 @@
         	</string>
         
     <string name="updata_detail">
-		v1.9 版本说明：\n\n
-        1、更改机器码验证方式，服务器验证\n
-		2、增加设置选项\n
+		v1.9 版本功能说明：\n\n
+        1、机器码验证方式，服务器验证\n
+		2、可以设置取关速度\n
         3、解决平板不能获取机器码的问题,自动获取随机机器码\n
-        4、使用方式和老版本一样\n\n\n
-		本次更新功能：部分微信公众号取关完又回来，应该是取关速度太快被腾讯检测到，所以修改了设置，真正能设置取关速度，
-        建议值为1000以内（）
-        5、增加在线检查更新功能。
+        4、使用方式和老版本一样
+        5、在线检查更新功能。\n\n\n
+        本次更新功能：增加日志，如果启动没反应或者不全自动或者奔溃，请发送日志给我，日志路径\n
+        sd卡/Android/data/com.lanshifu.quguang/files/dev/logs/
 
 
         </string>

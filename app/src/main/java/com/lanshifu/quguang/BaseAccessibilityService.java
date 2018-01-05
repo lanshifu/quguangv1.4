@@ -196,6 +196,30 @@ public class BaseAccessibilityService extends AccessibilityService {
         return false;
     }
 
+    public boolean performLongClick(AccessibilityNodeInfo info,String className) {
+        if (info == null) {
+            return false;
+        }
+        if (info.isLongClickable()){
+            if (info.getClassName().equals(className)){
+                return info.performAction(AccessibilityNodeInfo.ACTION_LONG_CLICK);
+            }
+        }
+
+        if (info.getChildCount() > 0){
+            for (int i = 0; i < info.getChildCount(); i++) {
+                boolean longClick = performLongClick(info.getChild(i),className);
+                if (longClick){
+                    return true;
+                }
+            }
+            return false;
+        }else {
+            return false;
+        }
+    }
+
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void clickTextViewByID(String id) {
         AccessibilityNodeInfo accessibilityNodeInfo = getRootInActiveWindow();

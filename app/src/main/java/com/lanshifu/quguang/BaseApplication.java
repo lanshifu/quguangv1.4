@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.lanshifu.quguang.log.LogHandler;
 import com.lanshifu.quguang.utils.StorageUtil;
+import com.lanshifu.quguang.utils.ToastUtils;
 
 /**
  * Created by lanxiaobin on 2018/1/5.
@@ -26,6 +27,8 @@ public class BaseApplication extends Application {
 
         LogHandler logHandler = new LogHandler(this);
         logHandler.setName("LogHandler");
+        logHandler.start();
         StorageUtil.init(context);
+        ToastUtils.init(context);
     }
 }

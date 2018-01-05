@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onButtonClicked(View view) {
+        ToastUtils.showLongToast("找到‘"+getString(R.string.app_name) +"',打开开关");
         startActivity(mAccessibleIntent); // 启动系统菜单
     }
 
