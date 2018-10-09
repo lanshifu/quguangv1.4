@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">蓝师傅公众号取关脚本1.9(201801)</string>
-    <string name="accessibility_description">欢迎使用v1.9：打开开关，取关完成记得回来关闭哦。
+    <string name="app_name">蓝师傅公众号取关脚本1.11(20181009)</string>
+    <string name="accessibility_description">欢迎使用v1.11：打开开关，取关完成记得回来关闭哦。
         </string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">设置</string>
@@ -17,7 +17,7 @@
         	</string>
         
     <string name="updata_detail">
-		v1.9 版本功能说明：\n\n
+		v1.10 版本功能说明：\n\n
         1、机器码验证方式，服务器验证\n
 		2、可以设置取关速度\n
         3、解决平板不能获取机器码的问题,自动获取随机机器码\n

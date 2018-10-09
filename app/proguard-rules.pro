@@ -15,3 +15,18 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-ignorewarnings
+
+# 这里根据具体的SDK版本修改
+#-libraryjars libs/BmobSDK_V3.4.6_0415.jar
+
+-keepattributes Signature
+
+# 不混淆BmobSDK
+-keep class cn.bmob.v3.** {*;}
+
+# 保证继承自BmobObject、BmobUser类的JavaBean不被混淆
+-keep class * extends cn.bmob.v3.BmobObject {
+    *;
+}
+

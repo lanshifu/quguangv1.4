@@ -184,14 +184,16 @@ public class BaseAccessibilityService extends AccessibilityService {
         List<AccessibilityNodeInfo> nodeInfoList = accessibilityNodeInfo.findAccessibilityNodeInfosByText(text);
         if (nodeInfoList != null && !nodeInfoList.isEmpty()) {
             LogHelper.d("包含关键字 "+text);
+            boolean clickResult = false;
             for (AccessibilityNodeInfo nodeInfo : nodeInfoList) {
                 if (nodeInfo != null) {
                     boolean click = performViewClick(nodeInfo);
                     if (click){
-                        return true;
+                        clickResult = true;
                     }
                 }
             }
+            return clickResult;
         }
         return false;
     }

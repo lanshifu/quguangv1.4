@@ -164,29 +164,20 @@ public class CheckActivity extends Activity {
         BmobQuery<User2> bmobQuery = new BmobQuery<User2>();
         bmobQuery.addQueryKeys("MachineNumber");
         bmobQuery.setLimit(1000);
+        bmobQuery.addWhereEqualTo("MachineNumber",number);
         bmobQuery.findObjects(this, new FindListener<User2>() {
             @Override
             public void onSuccess(List<User2> object) {
-                int b=-1;
-                // TODO Auto-generated method stub
-                for (User2 user : object) {
-                    if (user.getMachineNumber().equals(number)) {
-                            b=0;
-                            break;
-                    }
-                }
 
                 if(mMaterialDialog!=null){
                     mMaterialDialog.dismiss();
                 }
-                if(b==0){
+                if(object.size() > 0){
                     enterHome("123");
                     PrefUtils.setPrefBool(CheckActivity.this,"hadregisted",true);
-                }else if(b==-1){
+                }else{
                     showDialog("提示信息","软件未注册，进入主页面后点击右上方获取机器码发给卖家进行注册","确定",true);
 
-                }else if(b==1){
-                    showDialog("警告","你已经被列入黑名单，不能正常使用软件","确定",true);
                 }
 
                 //注意：这里的Person对象中只有指定列的数据。

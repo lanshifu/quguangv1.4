@@ -196,27 +196,17 @@ public class MainActivity extends AppCompatActivity {
         BmobQuery<User2> bmobQuery = new BmobQuery<User2>();
         bmobQuery.addQueryKeys("MachineNumber");
         bmobQuery.setLimit(1000);
+        bmobQuery.addWhereEqualTo("MachineNumber",number);
         bmobQuery.findObjects(this, new FindListener<User2>() {
             @Override
             public void onSuccess(List<User2> object) {
-                int b = -1;
-                // TODO Auto-generated method stub
-                for (User2 user : object) {
-                    if (user.getMachineNumber().equals(number)) {
-                        b = 0;
-                        break;
-                    }
-                }
-
                 if (mMaterialDialog != null) {
                     mMaterialDialog.dismiss();
                 }
-                if (b == 0) {
+                if (object.size() >0) {
                     showInfoDialog("软件已注册");
-                } else if (b == -1) {
+                } else {
                     showInfoDialog("软件未注册");
-                } else if (b == 1) {
-                    showInfoDialog("你处于黑名单状态");
                 }
 
                 //注意：这里的Person对象中只有指定列的数据。
