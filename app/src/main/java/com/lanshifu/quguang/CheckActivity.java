@@ -176,7 +176,12 @@ public class CheckActivity extends Activity {
                     enterHome("123");
                     PrefUtils.setPrefBool(CheckActivity.this,"hadregisted",true);
                 }else{
-                    showDialog("提示信息","软件未注册，进入主页面后点击右上方获取机器码发给卖家进行注册","确定",true);
+                    boolean canTry = !PrefUtils.getPrefBool(CheckActivity.this,PrefUtils.KEY_TRY_FINISH,false);
+                    String message = "软件未注册，进入主页面后点击右上方获取机器码发给卖家进行注册,<没有试用机会>";
+                    if (canTry){
+                        message = "软件未注册，进入主页面后点击右上方获取机器码发给卖家进行注册,<您有一次30秒试用机会>";
+                    }
+                    showDialog("提示信息",message,"确定",true);
 
                 }
 

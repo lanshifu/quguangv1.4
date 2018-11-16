@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefUtils {
+
+	/**
+	 * 试用完成
+	 */
+	public static final String KEY_TRY_FINISH = "try_finish";
 	
 	//bool
 	public static boolean getPrefBool(Context context,String key,boolean defValue)

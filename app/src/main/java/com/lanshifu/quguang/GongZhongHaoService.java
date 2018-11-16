@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
@@ -44,14 +45,12 @@ public class GongZhongHaoService extends BaseAccessibilityService {
     private boolean firstInsert = true;
     private boolean isLongClick = false;  //
     private long timeOut;
+    Handler mHandler = new Handler();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Bmob.initialize(this, "21c4f08065bc84698c71cb048cf5a024");
-        check_toServer();
-        String string = PrefUtils.getPrefString(getApplicationContext(),"timeout","0");
-        timeOut = Long.parseLong(string);
+
     }
 
     /**
@@ -84,18 +83,22 @@ public class GongZhongHaoService extends BaseAccessibilityService {
         bmobQuery.findObjects(this, new FindListener<User2>() {
             @Override
             public void onSuccess(List<User2> object) {
+                LogHelper.d("queryUser object.size=" + object.size());
                 if (object.size() > 0) {
                     permission = true;
                     PrefUtils.setPrefBool(GongZhongHaoService.this,"hadregisted",true);
                     ToastUtils.showLongToast("软件已注册，请放心使用");
                 } else  {
-                    ToastUtils.showLongToast("软件未注册，没有权限使用");
+                    if (!permission){
+                        ToastUtils.showLongToast("软件未注册，没有权限使用");
+                    }
                 }
                 //注意：这里的Person对象中只有指定列的数据。
             }
 
             @Override
             public void onError(int code, String msg) {
+                LogHelper.d("onError");
                 LogHelper.e("连接服务器失败，请检查网络：" + msg);
                 ToastUtils.showShortToast("连接服务器失败，请检查网络：" + msg);
             }
@@ -150,16 +153,10 @@ public class GongZhongHaoService extends BaseAccessibilityService {
 
 
     @Override
-    public void onInterrupt() {
-        LogHelper.d("--------------onInterrupt服务 service interrupt");
-        ToastUtils.showLongToast("中断脚本服务");
-        Toast.makeText(this, "中断脚本服务", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public boolean onUnbind(Intent intent) {
         LogHelper.d("--------------onUnbind 服务");
         ToastUtils.showLongToast("服务已关闭，蓝师傅已停止服务");
+        mHandler.removeCallbacksAndMessages(null);
         return super.onUnbind(intent);
     }
 
@@ -168,7 +165,22 @@ public class GongZhongHaoService extends BaseAccessibilityService {
         String timeout = PrefUtils.getPrefString(getApplicationContext(), "fast", 50 + "");
         setServiceInfo(Integer.parseInt(timeout));
         LogHelper.d("-------------onServiceConnected 已连接脚本服务 -----------------------");
-        Toast.makeText(this, "已连接脚本服务", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "已连接脚本服务", Toast.LENGTH_SHORT).show();
+        String message = "已连接脚本服务";
+        if (!PrefUtils.getPrefBool(this,PrefUtils.KEY_TRY_FINISH,false)){
+            message = "已连接脚本服务,您有一次试用机会，如已注册请忽略";
+            permission = true;
+            PrefUtils.setPrefBool(this,PrefUtils.KEY_TRY_FINISH,true);
+            tryMode();
+
+        }
+        ToastUtils.showLongToast(message);
+
+        Bmob.initialize(this, "21c4f08065bc84698c71cb048cf5a024");
+        check_toServer();
+        String string = PrefUtils.getPrefString(getApplicationContext(),"timeout","0");
+        timeOut = Long.parseLong(string);
+
     }
 
     private void setServiceInfo(int timeout) {
@@ -184,5 +196,20 @@ public class GongZhongHaoService extends BaseAccessibilityService {
         setServiceInfo(info);
     }
 
+    /**
+     * 试用
+     */
+    private void tryMode(){
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!PrefUtils.getPrefBool(GongZhongHaoService.this,"hadregisted",false)){
+                    permission = false;
+                    ToastUtils.showLongToast("试用结束，如果好用请购买");
+                }
+
+            }
+        },30000);
+    }
 
 }

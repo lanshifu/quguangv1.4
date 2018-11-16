@@ -72,12 +72,11 @@ public class MainActivity extends AppCompatActivity {
         forUser = getIntent().getStringExtra("for");
         switchPlugin = (Button) findViewById(R.id.button_accessible);
         iv_help = (ImageView) findViewById(R.id.iv_help);
-        updateServiceStatus();
     }
 
 
     public void onButtonClicked(View view) {
-        ToastUtils.showLongToast("找到‘"+getString(R.string.app_name) +"',打开开关");
+        ToastUtils.showLongToast("找到‘"+getString(R.string.app_name) +"'开关");
         startActivity(mAccessibleIntent); // 启动系统菜单
     }
 
@@ -142,46 +141,27 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.action_check) {
             //检查注册情况
             String phoneNumber = BmobUtils.getPhoneNumber(getApplicationContext());
-            if (phoneNumber == null || phoneNumber == "" || phoneNumber.equals("000000000000000")) {
+            if (TextUtils.isEmpty(phoneNumber)  || phoneNumber.equals("000000000000000")) {
                 phoneNumber = PrefUtils.getPrefString(getApplicationContext(), "machineNumber", null);
             }
             queryUser(phoneNumber);
         } else if (id == R.id.update) {
             //检查更新
 //            checkUpdate();
-            checkUpdataAndDownload();
+//            checkUpdataAndDownload("");
+            download("http://118.24.18.251:9999/api/download");
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void checkUpdate() {
 
-        BmobQuery<Update> bmobQuery = new BmobQuery<Update>();
-        bmobQuery.getObject(MainActivity.this, "R1MvAAAO", new GetListener<Update>() {
-            @Override
-            public void onSuccess(Update updateBean) {
-                if (updateBean.getNewVersion()) {
-                    showUpdateDialog(updateBean.getUrl());
-
-                } else {
-                    showInfoDialog("已是最新版本！");
-                }
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                showInfoDialog("网络连接失败：" + s);
-            }
-        });
-
-    }
 
     /**
      * 跳转到网页更新
      *
      * @param url
      */
-    private void showUpdateDialog(String url) {
+    private void download(String url) {
 //        final Uri uri = Uri.parse("http://www.baidu.com");
         final Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
